@@ -43,7 +43,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest'
 })
 export class HelloComponent {
   stop$ = new Subject();
-  counter$ = timer(0, 250).pipe(
+  counter$ = timer(0, 200).pipe(
     // take(10),
     // tap(_ => Promise.resolve().then(() => this.ref.detectChanges()))
     // tap(r => console.log(r))
@@ -74,12 +74,12 @@ export class HelloComponent {
     // })
 
 
-    this.counter$
-      .pipe(
-        tap(_ => this.reRender()),
-        takeUntil(this.stop$)
-      )
-      .subscribe();
+    // this.counter$
+    //   .pipe(
+    //     tap(_ => this.reRender()),
+    //     takeUntil(this.stop$)
+    //   )
+    //   .subscribe();
   }
 
   reRender() {
