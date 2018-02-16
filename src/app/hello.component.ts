@@ -25,8 +25,14 @@ import { combineLatest } from 'rxjs/observable/combineLatest'
     <button (click)="stop$.next('')">stop</button>
     <button (click)="remove(ticks[0])">remove</button>
     <button (click)="add()">add</button>
+    <input type="checkbox" #box>
     <div class="tickholder">
+    <ng-container *ngIf="box.value">
       <show-tick *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick>
+    </ng-container>
+    <ng-container *ngIf="!box.value">
+      <show-tick-bar *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick-bar>
+    </ng-container>
     </div>
     <!-- <pre><code>{{ticks[0]|async|json}}</code></pre> -->
      `,
@@ -76,7 +82,7 @@ export class HelloComponent {
 
     // this.counter$
     //   .pipe(
-    //     tap(_ => this.reRender()),
+    //     tap(_ => this.ref.detectChanges()),
     //     takeUntil(this.stop$)
     //   )
     //   .subscribe();
