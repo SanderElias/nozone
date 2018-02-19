@@ -5,11 +5,12 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule, {
-  // add zone:noop to disable ngZones
-  // ngZone: 'noop'
-})
-  .catch(err => console.log(err));
+platformBrowserDynamic()
+    .bootstrapModule(AppModule, {
+        // add zone:noop to disable ngZones
+        // ngZone: 'noop'
+    })
+    .catch(err => console.log(err));
