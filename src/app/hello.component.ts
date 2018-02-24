@@ -42,7 +42,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
     </div>
     <!-- <pre><code>{{ticks[0]|async|json}}</code></pre> -->
      `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Default,
     styles: [
         `
       .tickholder {
@@ -55,7 +55,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 })
 export class HelloComponent {
     stop$ = new Subject();
-    counter$ = timer(0, 200)
+    counter$ = timer(0, 1000 / 60)
         .pipe
         // take(10),
         // tap(_ => Promise.resolve().then(() => this.ref.detectChanges()))
@@ -83,12 +83,9 @@ export class HelloComponent {
         //     // console.log(t[0])
         //     this.ref.detectChanges();
         // });
-        // this.counter$
-        //   .pipe(
-        //     tap(_ => this.ref.detectChanges()),
-        //     takeUntil(this.stop$)
-        //   )
-        //   .subscribe();
+        this.counter$
+            .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
+            .subscribe();
     }
 
     reRender() {
