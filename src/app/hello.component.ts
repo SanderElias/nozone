@@ -55,7 +55,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 })
 export class HelloComponent {
     stop$ = new Subject();
-    counter$ = timer(0, 1000 / 60)
+    counter$ = timer(0, 1000 / 30)
         .pipe
         // take(10),
         // tap(_ => Promise.resolve().then(() => this.ref.detectChanges()))
