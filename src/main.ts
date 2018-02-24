@@ -11,6 +11,6 @@ if (environment.production) {
 platformBrowserDynamic()
     .bootstrapModule(AppModule, {
         // add zone:noop to disable ngZones
-        ngZone: 'noop'
+        // ngZone: 'noop'
     })
     .catch(err => console.log(err));
