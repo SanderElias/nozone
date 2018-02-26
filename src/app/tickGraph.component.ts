@@ -25,7 +25,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: 'hello',
+    selector: 'tick-graph',
     template: `
     <h1>Hello counter: {{counter$|async}}!</h1>
     <button (click)="stop$.next('')">stop</button>
@@ -53,7 +53,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
     `
     ]
 })
-export class HelloComponent {
+export class TickGraphComponent {
     stop$ = new Subject();
     counter$ = timer(0, 1000 / 30)
         .pipe
@@ -83,9 +83,9 @@ export class HelloComponent {
         //     // console.log(t[0])
         //     this.ref.detectChanges();
         // });
-        this.counter$
-            .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
-            .subscribe();
+        // this.counter$
+        //     .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
+        //     .subscribe();
     }
 
     reRender() {

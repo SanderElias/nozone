@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
     <div style="text-align:center">
       <h1>
-        Welcome to {{title}}!
+        Ticker-graph
       </h1>
-      <hello></hello>
+      <tick-graph></tick-graph>
     </div>
 
   `,
-  styles: []
+    styles: []
 })
 export class AppComponent {
-  title = 'app';
+    title = 'app';
 }
