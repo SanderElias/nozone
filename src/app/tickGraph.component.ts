@@ -27,11 +27,12 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
     // tslint:disable-next-line:component-selector
     selector: 'tick-graph',
     template: `
-    <h1>Hello counter: {{counter$|async}}!</h1>
     <button (click)="stop$.next('')">stop</button>
     <button (click)="remove(ticks[0])">remove</button>
     <button (click)="add()">add</button>
     <input type="checkbox" #box>
+    <br>
+    <br>
     <div class="tickholder">
     <ng-container *ngIf="box.checked">
       <show-tick *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick>
@@ -40,7 +41,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
       <show-tick-bar *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick-bar>
     </ng-container>
     </div>
-    <!-- <pre><code>{{ticks[0]|async|json}}</code></pre> -->
+
      `,
     changeDetection: ChangeDetectionStrategy.Default,
     styles: [
@@ -55,7 +56,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 })
 export class TickGraphComponent {
     stop$ = new Subject();
-    counter$ = timer(0, 1000 / 30);
+    counter$ = timer(0, 1000 / 60);
     lock = false;
 
     @Input() name: string;
@@ -71,27 +72,9 @@ export class TickGraphComponent {
         private ref: ChangeDetectorRef,
         private t: TickService
     ) {
-        // combineLatest(this.ticks).subscribe(t => {
-        //     // console.log(t[0])
-        //     this.ref.detectChanges();
-        // });
-        this.counter$
-            .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
-            .subscribe();
-    }
-
-    reRender() {
-        // don't que up render commands, go with the flow.
-        if (this.lock) {
-            return;
-        }
-        this.lock = true;
-        // schedule a micro-task for rendering
-        Promise.resolve()
-            // run the CD
-            .then(() => this.ref.detectChanges())
-            // and unlock
-            .then(() => (this.lock = false));
+        // this.counter$
+        //     .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
+        //     .subscribe();
     }
 
     remove(ticker) {

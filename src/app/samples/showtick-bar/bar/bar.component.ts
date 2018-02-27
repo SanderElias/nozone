@@ -13,6 +13,7 @@ import {
         `
     :host {
       background-color:green;
+      margin-left: 1px;
     }
   `
     ]
