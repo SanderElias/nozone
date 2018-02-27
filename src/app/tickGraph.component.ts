@@ -55,12 +55,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 })
 export class TickGraphComponent {
     stop$ = new Subject();
-    counter$ = timer(0, 1000 / 30)
-        .pipe
-        // take(10),
-        // tap(_ => Promise.resolve().then(() => this.ref.detectChanges()))
-        // tap(r => console.log(r))
-        ();
+    counter$ = timer(0, 1000 / 30);
     lock = false;
 
     @Input() name: string;
@@ -69,9 +64,6 @@ export class TickGraphComponent {
         this.t.tick$.pipe(takeUntil(this.stop$)),
         this.t.tick$.pipe(takeUntil(this.stop$)),
         this.t.tick$.pipe(takeUntil(this.stop$))
-        // this.t.tickMutable$().pipe(takeUntil(this.stop$)),
-        // this.t.tickMutable$().pipe(takeUntil(this.stop$)),
-        // this.t.tickMutable$().pipe(takeUntil(this.stop$))
     ];
 
     constructor(
