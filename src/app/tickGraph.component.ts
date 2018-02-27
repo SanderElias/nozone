@@ -83,9 +83,9 @@ export class TickGraphComponent {
         //     // console.log(t[0])
         //     this.ref.detectChanges();
         // });
-        // this.counter$
-        //     .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
-        //     .subscribe();
+        this.counter$
+            .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
+            .subscribe();
     }
 
     reRender() {
