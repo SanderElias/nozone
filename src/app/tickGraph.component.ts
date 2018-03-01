@@ -25,13 +25,14 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: 'hello',
+    selector: 'tick-graph',
     template: `
-    <h1>Hello counter: {{counter$|async}}!</h1>
     <button (click)="stop$.next('')">stop</button>
     <button (click)="remove(ticks[0])">remove</button>
     <button (click)="add()">add</button>
     <input type="checkbox" #box>
+    <br>
+    <br>
     <div class="tickholder">
     <ng-container *ngIf="box.checked">
       <show-tick *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick>
@@ -40,7 +41,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
       <show-tick-bar *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick-bar>
     </ng-container>
     </div>
-    <!-- <pre><code>{{ticks[0]|async|json}}</code></pre> -->
+
      `,
     changeDetection: ChangeDetectionStrategy.Default,
     styles: [
@@ -53,14 +54,9 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
     `
     ]
 })
-export class HelloComponent {
+export class TickGraphComponent {
     stop$ = new Subject();
-    counter$ = timer(0, 1000 / 30)
-        .pipe
-        // take(10),
-        // tap(_ => Promise.resolve().then(() => this.ref.detectChanges()))
-        // tap(r => console.log(r))
-        ();
+    counter$ = timer(0, 1000 / 60);
     lock = false;
 
     @Input() name: string;
@@ -69,9 +65,6 @@ export class HelloComponent {
         this.t.tick$.pipe(takeUntil(this.stop$)),
         this.t.tick$.pipe(takeUntil(this.stop$)),
         this.t.tick$.pipe(takeUntil(this.stop$))
-        // this.t.tickMutable$().pipe(takeUntil(this.stop$)),
-        // this.t.tickMutable$().pipe(takeUntil(this.stop$)),
-        // this.t.tickMutable$().pipe(takeUntil(this.stop$))
     ];
 
     constructor(
@@ -79,27 +72,9 @@ export class HelloComponent {
         private ref: ChangeDetectorRef,
         private t: TickService
     ) {
-        // combineLatest(this.ticks).subscribe(t => {
-        //     // console.log(t[0])
-        //     this.ref.detectChanges();
-        // });
         // this.counter$
         //     .pipe(tap(_ => this.ref.detectChanges()), takeUntil(this.stop$))
         //     .subscribe();
-    }
-
-    reRender() {
-        // don't que up render commands, go with the flow.
-        if (this.lock) {
-            return;
-        }
-        this.lock = true;
-        // schedule a micro-task for rendering
-        Promise.resolve()
-            // run the CD
-            .then(() => this.ref.detectChanges())
-            // and unlock
-            .then(() => (this.lock = false));
     }
 
     remove(ticker) {
