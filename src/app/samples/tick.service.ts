@@ -11,7 +11,7 @@ export class TickService {
      * new prices move in from the end.
      */
     tick$ = interval(10).pipe(
-        scan<number>((priceArr: number[], n: number) => {
+        scan((priceArr: number[], n: number) => {
             const lastPrice =
                 priceArr.length === 0
                     ? Math.random() * 500
@@ -27,7 +27,7 @@ export class TickService {
 
     tickMutable$ = () =>
         interval(2).pipe(
-            scan<number>((priceArr: number[], n: number) => {
+            scan((priceArr: number[], n: number) => {
                 const lastPrice =
                     priceArr.length === 0
                         ? Math.random() * 500
