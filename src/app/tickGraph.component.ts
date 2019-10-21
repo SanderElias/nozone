@@ -33,7 +33,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
     <input type="checkbox" #box>
     <br>
     <br>
-    <div class="tickholder">
+    <div class="tickHolder">
     <ng-container *ngIf="box.checked">
       <show-tick *ngFor="let tick$ of ticks" [data]="tick$|async" ></show-tick>
     </ng-container>
@@ -46,7 +46,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
     changeDetection: ChangeDetectionStrategy.Default,
     styles: [
         `
-      .tickholder {
+      .tickHolder {
         display:grid;
         grid-template-columns: repeat(auto-fill, 305px) ;
         grid-auto-rows: 1fr;
