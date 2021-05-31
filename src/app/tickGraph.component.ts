@@ -1,21 +1,12 @@
 import {
-  Component,
-  Input,
   ApplicationRef,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  ChangeDetectorRef,
+  ChangeDetectionStrategy, ChangeDetectorRef, Component,
+  Input
 } from '@angular/core';
+import { Subject, timer } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { TickService } from './samples/tick.service';
 
-import {timer} from 'rxjs/observable/timer';
-import {take, tap, debounce, debounceTime, throttleTime} from 'rxjs/operators';
-import {TickService} from './samples/tick.service';
-import {interval} from 'rxjs/observable/interval';
-import {Scheduler} from 'rxjs/Scheduler';
-import {Subject} from 'rxjs/Subject';
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {combineLatest} from 'rxjs/observable/combineLatest';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -42,7 +33,7 @@ import {combineLatest} from 'rxjs/observable/combineLatest';
       </ng-container>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
       .tickHolder {
@@ -59,36 +50,8 @@ export class TickGraphComponent {
   lock = false;
 
   @Input() name: string;
-
+ 
   ticks = [
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
       this.t.tick$.pipe(takeUntil(this.stop$)),
       this.t.tick$.pipe(takeUntil(this.stop$)),
       this.t.tick$.pipe(takeUntil(this.stop$)),

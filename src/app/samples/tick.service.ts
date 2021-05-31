@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { tap, scan } from 'rxjs/operators';
-import { interval } from 'rxjs/observable/interval';
+import { interval } from 'rxjs';
+import { scan } from 'rxjs/operators';
 
 @Injectable()
 export class TickService {
