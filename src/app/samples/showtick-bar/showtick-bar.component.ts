@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'show-tick-bar',
@@ -18,15 +18,13 @@ import { Component, OnInit, Input } from '@angular/core';
   align-items:end;
 }
 `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShowtickBarComponent implements OnInit {
+export class ShowtickBarComponent {
     @Input('data') data: number[];
     maxVal: number;
 
-    constructor() {}
-
-    ngOnInit() {}
     ngOnChanges() {
         if (Array.isArray(this.data)) {
             this.maxVal = this.data.reduce((x, y) => Math.max(x, y));

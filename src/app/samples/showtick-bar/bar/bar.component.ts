@@ -1,9 +1,6 @@
 import {
-    Component,
-    OnInit,
-    Input,
-    SimpleChanges,
-    HostBinding
+    ChangeDetectionStrategy,
+    Component, HostBinding, Input, OnInit
 } from '@angular/core';
 
 @Component({
@@ -12,21 +9,21 @@ import {
     styles: [
         `
     :host {
+      display: block;
       background-color:green;
       margin-left: 1px;
     }
   `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class BarComponent implements OnInit {
     @Input() relHeight;
     @Input() max = 100;
     @HostBinding('style.height') height;
 
-    constructor() {}
-
     ngOnInit() {
         this.height = this.relHeight * (1 / this.max) * 100 + '%';
-        //console.log('called', this.height);
     }
 }

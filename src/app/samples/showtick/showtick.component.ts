@@ -1,22 +1,13 @@
 import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  SimpleChanges,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-  ChangeDetectionStrategy
+  AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild
 } from '@angular/core';
-// import Chart from 'chart.js';
 
 declare var Chart: any;
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'show-tick',
-  changeDetection : ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="holder">
       <canvas #graph width="150" height="75"></canvas>
@@ -31,35 +22,24 @@ declare var Chart: any;
     `
   ]
 })
-export class ShowtickComponent implements OnInit, AfterViewInit, OnChanges {
+export class ShowtickComponent implements  AfterViewInit, OnChanges {
   _data: number[];
   @ViewChild('graph') canvas: ElementRef;
   myChart;
 
   @Input() data;
-  // @Input('data') set data(arr) {
-  //   this._data = arr;
-  //   // console.log('update',arr)
 
-  ngOnChanges(sc:SimpleChanges) {
+  ngOnChanges(sc: SimpleChanges) {
     if (sc.data && this.myChart) {
       this.myChart.data.datasets[0].data = this.data;
       this.myChart.update();
     }
   }
 
-  // get data() {return this._data; }
-
-  constructor() { }
-
-  ngOnInit() { }
-
-
   ngAfterViewInit() {
     const cv: HTMLCanvasElement = this.canvas.nativeElement;
     const ctx = cv.getContext('2d');
     const labels = Array.from({ length: 15 }, (e, i) => i);
-    // console.log(ctx, scale);
     this.myChart = new Chart(ctx, {
       type: 'line',
       data: {

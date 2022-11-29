@@ -51,20 +51,7 @@ export class TickGraphComponent {
 
   @Input() name: string;
  
-  ticks = [
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-      this.t.tick$.pipe(takeUntil(this.stop$)),
-];
+  ticks = [];
 
   constructor(
     private app: ApplicationRef,
@@ -77,6 +64,10 @@ export class TickGraphComponent {
         takeUntil(this.stop$)
       )
       .subscribe();
+
+      for (let i = 0; i < 40; i++) {
+        this.add();
+      }
   }
 
   remove(ticker) {
@@ -85,6 +76,7 @@ export class TickGraphComponent {
   }
 
   add() {
-    this.ticks.push(this.t.tick$.pipe(takeUntil(this.stop$)));
+    this.ticks.push(this.t.tickImmutable$.pipe(takeUntil(this.stop$)));
+    // this.ticks.push(this.t.tickMutable$().pipe(takeUntil(this.stop$)));
   }
 }
