@@ -101,7 +101,6 @@
       }
     }
   },
-  "defaultProject": "no-zone-clean",
   "schematics": {
     "@schematics/angular:class": {
       "skipTests": true
