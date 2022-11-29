@@ -46,7 +46,7 @@ import { TickService } from './samples/tick.service';
 })
 export class TickGraphComponent {
   stop$ = new Subject();
-  counter$ = timer(0, 1000 / 30);
+  counter$ = timer(0, 1000 / 60);
   lock = false;
 
   @Input() name: string;
